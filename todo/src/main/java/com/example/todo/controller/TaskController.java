@@ -13,32 +13,32 @@ import java.util.List;
 public class TaskController {
 
     @Autowired
-    private TaskRepository TaskRepository;
+    private TaskRepository taskRepository;
 
     // 一覧取得
     @GetMapping
     public List<Task> getTasks() {
-        return TaskRepository.findAll();
+        return taskRepository.findAll();
     }
 
     // 新規作成
     @PostMapping
     public Task createTask(@RequestBody Task task) {
-        return TaskRepository.save(task);
+        return taskRepository.save(task);
     }
 
     // 更新
     @PutMapping("/{id}")
     public Task updateTask(@PathVariable Long id, @RequestBody Task updated) {
-        Task task = TaskRepository.findById(id).orElseThrow();
+        Task task = taskRepository.findById(id).orElseThrow();
         task.setTitle(updated.getTitle());
         task.setCompleted(updated.isCompleted());
-        return TaskRepository.save(task);
+        return taskRepository.save(task);
     }
 
     // 削除
     @DeleteMapping("/{id}")
     public void deleteTask(@PathVariable Long id) {
-        TaskRepository.deleteById(id);
+        taskRepository.deleteById(id);
     }
 }
